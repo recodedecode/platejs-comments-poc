@@ -1,0 +1,22 @@
+{
+  "sourceRoot": "libs/editor-tools/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/editor-tools/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/editor-tools"],
+      "options": {
+        "jestConfig": "libs/editor-tools/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

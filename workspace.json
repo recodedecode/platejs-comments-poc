@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "projects": {
+    "demo": "apps/demo",
+    "demo-e2e": "apps/demo-e2e",
+    "editor": "libs/editor",
+    "editor-config": "libs/editor-config",
+    "editor-tools": "libs/editor-tools"
+  }
+}
