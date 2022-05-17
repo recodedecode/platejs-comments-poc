@@ -32,7 +32,11 @@ import {
 } from '@proto/editor-comments'
 
 
-export const TextareaToolbar = () => {
+interface Props {
+  comments?: boolean
+}
+
+export const TextareaToolbar = ({ comments }: Props) => {
 
   const editor = usePlateEditorRef()!
   const { onAddComment } = useInsertComment(editor)
@@ -71,13 +75,17 @@ export const TextareaToolbar = () => {
       <AlignToolbarButton
         value="right"
         icon={<FormatAlignRight />} />
-      <div className="editor-toolbar-divider" />
-      <div data-slate-comment={true}>
-        <MarkToolbarButton
-          type={getPluginType(editor, MARK_COMMENT)}
-          icon={<Comment />}
-          onMouseDown={onAddComment} />
-      </div>
+      {comments && (
+        <>
+          <div className="editor-toolbar-divider" />
+          <div data-slate-comment={true}>
+            <MarkToolbarButton
+              type={getPluginType(editor, MARK_COMMENT)}
+              icon={<Comment />}
+              onMouseDown={onAddComment} />
+          </div>
+        </>
+      )}
     </>
   )
 }

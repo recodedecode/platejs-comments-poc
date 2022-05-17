@@ -38,12 +38,19 @@ export interface TextAreaEditorRef {
 
 interface Props {
   id: string
+  comments?: boolean
   onBlur?: () => void
   onFocus?: () => void
   onChange?: (nodes: EditorNode[]) => void
 }
 
-const TextAreaEditorWrapped = forwardRef(({ id, onBlur, onFocus, ...props }: Props, ref: any) => {
+const TextAreaEditorWrapped = forwardRef(({
+  id,
+  comments,
+  onBlur,
+  onFocus,
+  ...props
+}: Props, ref: any) => {
 
   const state = usePlateStore(id)
   const [focussed, setFocussed] = useState(false)
@@ -85,11 +92,13 @@ const TextAreaEditorWrapped = forwardRef(({ id, onBlur, onFocus, ...props }: Pro
         plugins={plugins}
         {...props}>
         <div className={`editor-toolbar ${focussed ? 'editor-toolbar-active' : ''}`}>
-          <TextareaToolbar />
+          <TextareaToolbar comments={comments} />
         </div>
         <MentionCombobox items={configTextArea.mentionItems} />
       </Plate>
-      <CommentThreads />
+      {comments && (
+        <CommentThreads id={id} />
+      )}
     </div>
   )
 })

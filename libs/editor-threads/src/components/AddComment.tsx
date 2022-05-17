@@ -27,6 +27,13 @@ export const AddComment = memo(({ threadId, autofocus, onAddComment }: Props) =>
     setValue(event.target.value)
   }, [])
 
+  const onEnter = useCallback((event: any) => {
+    if(event.keyCode === 13 && event.shiftKey === false) {
+      event.preventDefault()
+      onClick()
+    }
+  }, [onClick])
+
   useEffect(() => {
     if ( ! ref?.current || ! autofocus) {
       return
@@ -49,6 +56,7 @@ export const AddComment = memo(({ threadId, autofocus, onAddComment }: Props) =>
         minRows={1}
         placeholder={'Comment here...'}
         onChange={onChange}
+        onKeyDown={onEnter}
         ref={ref} />
       <button
         css={styles.button}

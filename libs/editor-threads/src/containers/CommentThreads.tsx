@@ -5,10 +5,13 @@ import { Thread, ThreadPanel } from '../components'
 import { useEditorCommentStore, useRemoveCommentListener } from '@proto/editor-comments'
 
 
-export const CommentThreads = () => {
+interface Props {
+  id: string
+}
 
-  // TODO refactor
-  const editor = usePlateEditorState('textareaplayground')
+export const CommentThreads = ({ id }: Props) => {
+
+  const editor = usePlateEditorState(id)
   const commentsStore = useEditorCommentStore()
   const threads = commentsStore.getThreadsByDate()
 

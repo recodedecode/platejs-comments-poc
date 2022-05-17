@@ -1,101 +1,113 @@
-import { useCallback, useRef, useState } from 'react'
-import { TextAreaEditor, TextAreaEditorRef } from '@proto/editor'
-
-import {
-  EditorNode,
-  countChars,
-  countWords,
-  serializeToHtml,
-  serializeToPlaintext
-} from '@proto/editor-tools'
+import Link from 'next/link'
+import { css } from '@emotion/react'
 
 
 export const HomeScreen = () => {
-
-  const editorRef = useRef<TextAreaEditorRef>()
-  const [value, setValue] = useState<EditorNode[]>([])
-  const [preview, setPreview] = useState(false)
-  const [charCount, setCharCount] = useState(0)
-  const [wordCount, setWordCount] = useState(0)
-
-  const [plaintext, setPlaintext] = useState('')
-  const [html, setHtml] = useState('')
-
-  const onHidePreview = useCallback(() => {
-    setPreview(false)
-  }, [])
-
-  const onSave = useCallback(() => {
-    if ( ! editorRef?.current) {
-      return
-    }
-    console.log(JSON.stringify(value, null, 2))
-    setPlaintext(serializeToPlaintext(value))
-    setHtml(serializeToHtml(editorRef.current.get.editor(), value))
-    setPreview(true)
-  }, [editorRef, value])
-
-  const onChange = useCallback((nodes: EditorNode[]) => {
-    setValue(nodes)
-    const string = serializeToPlaintext(nodes)
-    setCharCount(countChars(string))
-    setWordCount(countWords(string))
-  }, [])
-
-  const wordCountColor = wordCount > 50
-    ? 'error'
-    : wordCount > 40
-      ? 'warning'
-      : 'info'
-
   return (
-    <div>
-      <div className="intro">
-        <h1>Demo Rich Text Editor</h1>
-        <p>
-          The below is a proof of concept rich &#34;textarea&#34;.
-          With this component it&#39;s possible to modify the way content is displayed inside,
-          including for image and media elements which are currently not included in this demo.
-        </p>
-        <p>
-          Content can be saved in AST like format, plaintext or html
-          - you can see a partial demonstration of this when entering text and selecting the save button.
-          You can also set character and word limits - try typing more than 50 words below to see the effect.
-        </p>
+    <main css={styles.main}>
+      <h1 css={styles.title}>
+        Demo <span>Editor</span>
+      </h1>
+
+      <p css={styles.description}>
+        Get started by selecting a demo
+        <br />
+        usecase from below.
+      </p>
+
+      <div css={styles.grid}>
+        <Link href="/simple" passHref>
+          <a css={styles.card}>
+            <h2>Simple &rarr;</h2>
+            <p>A simple example here.</p>
+          </a>
+        </Link>
+
+        <Link href="/comments" passHref>
+          <a css={styles.card}>
+            <h2>Comments &rarr;</h2>
+            <p>Comments example here.</p>
+          </a>
+        </Link>
+
       </div>
-      <TextAreaEditor
-        id="textareaplayground"
-        ref={editorRef}
-        onChange={onChange} />
-      <div className={`editor-meta ${wordCountColor}`}>
-        {wordCount} {wordCount === 1 ? 'word' : 'words'}
-      </div>
-      <div className="actions">
-        <button
-          className="action action-primary"
-          onClick={onSave}>
-          Save
-        </button>
-        <button
-          className="action pad-left-1"
-          onClick={onHidePreview}>
-          Hide
-        </button>
-      </div>
-      {preview && (
-        <>
-          <div className="preview">
-            <h2>Plaintext</h2>
-            <div dangerouslySetInnerHTML={{ __html: plaintext }}/>
-          </div>
-          <div className="preview">
-            <h2>HTML</h2>
-            <div dangerouslySetInnerHTML={{ __html: html }}/>
-          </div>
-        </>
-      )}
-    </div>
+    </main>
   )
 }
 
 export default HomeScreen
+
+const styles = {
+  main: css`
+    min-height: 100vh;
+    padding: 4rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `,
+  title: css`
+    margin: 0;
+    line-height: 1.15;
+    font-size: 4rem;
+    ext-align: center;
+
+    a {
+      color: #0070f3;
+      text-decoration: none;
+    }
+    a:hover,
+    a:focus,
+    a:active {
+      text-decoration: underline;
+    }
+  `,
+  description: css`
+    margin: 4rem 0;
+    line-height: 1.5;
+    font-size: 1.5rem;
+    text-align: center;
+  `,
+  grid: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 800px;
+  `,
+  card: css`
+    margin: 1rem;
+    padding: 1.5rem;
+    text-align: left;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    max-width: 300px;
+  
+    &:hover,
+    &:focus,
+    &:active {
+      color: #0070f3;
+      border-color: #0070f3;
+    }
+    
+    > h2 {
+      margin: 0 0 1rem 0;
+      font-size: 1.5rem;
+    }
+    
+    > p {
+      margin: 0;
+      font-size: 1.25rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
+      flex-direction: column;
+    }
+  `
+}

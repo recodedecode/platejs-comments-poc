@@ -15,9 +15,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Head>
         <title>Editor Demo</title>
       </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
+      <Component {...pageProps} />
     </>
   )
 }

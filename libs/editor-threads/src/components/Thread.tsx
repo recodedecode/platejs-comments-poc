@@ -24,6 +24,7 @@ export const Thread = ({
 }: Props) => {
 
   const onClickOutside = useDeselectComment()
+  const hasComments = !! comments.length
 
   return (
     <OutsideClick
@@ -32,10 +33,15 @@ export const Thread = ({
         css={[styles.component, active && styles.active]}
         data-slate-comment={id}
         onClick={onHighlightThread}>
-        <button
-          onClick={onRemoveComment}>
-          Remove
-        </button>
+        {hasComments ? (
+          <button
+            css={styles.remove}
+            onClick={onRemoveComment}>
+            ✕
+          </button>
+        ) : (
+          <h3 css={styles.name}>New Comment</h3>
+        )}
         {comments.map((comment, index) => (
           <div
             key={index}
@@ -56,7 +62,7 @@ export const Thread = ({
         ))}
         <AddComment
           threadId={id}
-          autofocus={comments.length === 0}
+          autofocus={ ! hasComments}
           onAddComment={onAddComment} />
       </div>
     </OutsideClick>
@@ -67,15 +73,25 @@ const styles = {
   component: css`
     display: flex;
     flex-direction: column;
+    position: relative;
     margin: 8px;
     padding: 8px;
     width: auto;
     border: 1px solid #efefef;
     border-radius: 8px;
+    transition: border 0.2s ease-out;
+
+    &:hover {
+      border: 1px solid #ccc;
+    }
   `,
   active: css`
     background: #fff;
     border: 1px solid rgba(252, 198, 3, 0.8);
+
+    &:hover {
+      border: 1px solid rgba(252, 198, 3, 0.8);
+    }
   `,
   status: css`
     display: inline-block;
@@ -89,6 +105,23 @@ const styles = {
     display: flex;
     flex-direction: column;
     padding-bottom: 15px;
+    cursor: pointer;
+
+    h3 {
+      transition: color 0.2s ease-out;
+    }
+
+    &:hover h3 {
+      color: #1476DB;
+    }
+
+    svg {
+      transition: fill 0.2s ease-out;
+    }
+
+    &:hover svg {
+      fill: #1476DB;
+    }
   `,
   header: css`
     display: flex;
@@ -120,5 +153,25 @@ const styles = {
   message: css`
     padding: 0px 0 0 25px;
     font-size: 1rem;
+  `,
+  remove: css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #ccc;
+    font-size: 18px;
+    font-weight: 200;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    transition: color 0.2s ease-out;
+
+    &:hover {
+      color: #f54242;
+    }
   `,
 }
