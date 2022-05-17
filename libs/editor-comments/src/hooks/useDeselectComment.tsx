@@ -6,12 +6,16 @@ import { useEditorCommentStore } from '../store'
 import { getCommentThreadsOnTextNode } from '../utils'
 
 
-export const useOnClickOutside = () => {
+export const useDeselectComment = () => {
 
-  const editor = usePlateEditorRef()!
+  const editor = usePlateEditorRef()
   const commentsStore = useEditorCommentStore()
 
   const onClickOutside = useCallback((event: any) => {
+
+    if ( ! editor) {
+      return
+    }
 
     const slateCommentDOMNode = event.target.hasAttribute('data-slate-comment')
       ? event.target

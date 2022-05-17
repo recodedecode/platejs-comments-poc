@@ -27,15 +27,15 @@ import {
 } from '@udecode/plate'
 
 import {
-  useInsertCommentThread,
-  MARK_COMMENT_THREAD,
+  useInsertComment,
+  MARK_COMMENT,
 } from '@proto/editor-comments'
 
 
 export const TextareaToolbar = () => {
 
   const editor = usePlateEditorRef()!
-  const { onAddComment } = useInsertCommentThread(editor)
+  const { onAddComment } = useInsertComment(editor)
 
   return (
     <>
@@ -74,7 +74,7 @@ export const TextareaToolbar = () => {
       <div className="editor-toolbar-divider" />
       <div data-slate-comment={true}>
         <MarkToolbarButton
-          type={getPluginType(editor, MARK_COMMENT_THREAD)}
+          type={getPluginType(editor, MARK_COMMENT)}
           icon={<Comment />}
           onMouseDown={onAddComment} />
       </div>

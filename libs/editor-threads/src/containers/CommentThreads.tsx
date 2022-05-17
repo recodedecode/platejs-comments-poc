@@ -2,8 +2,7 @@ import React, { useCallback } from 'react'
 import { css } from '@emotion/react'
 import { usePlateEditorState } from '@udecode/plate'
 import { Thread, ThreadPanel } from '../components'
-import { useEditorCommentStore } from '@proto/editor-comments'
-import { normalizeComments } from '../utils'
+import { useEditorCommentStore, useRemoveCommentListener } from '@proto/editor-comments'
 
 
 export const CommentThreads = () => {
@@ -13,15 +12,15 @@ export const CommentThreads = () => {
   const commentsStore = useEditorCommentStore()
   const threads = commentsStore.getThreadsByDate()
 
-  const onHighlightThread = (id: string) => {
+  useRemoveCommentListener(editor)
+
+  const onHighlightThread = useCallback((id: string) => {
     commentsStore.selectCommentThread(id)
-  }
+  }, [commentsStore])
 
   const onRemoveComment = useCallback((id: string) => {
-    if ( ! editor) return
     commentsStore.removeCommentThread(id)
-    normalizeComments(editor, id)
-  }, [commentsStore, editor])
+  }, [commentsStore])
 
   return (
     <ThreadPanel>

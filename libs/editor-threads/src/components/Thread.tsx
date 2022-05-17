@@ -2,7 +2,7 @@ import React from 'react'
 import ReactTimeAgo from 'react-time-ago'
 import { UserCircle } from '@styled-icons/boxicons-regular/UserCircle'
 import { css } from '@emotion/react'
-import { ICommentThread, useOnClickOutside } from '@proto/editor-comments'
+import { ICommentThread, useDeselectComment } from '@proto/editor-comments'
 import { AddComment } from './AddComment'
 import { OutsideClick } from './OutsideClick'
 
@@ -23,7 +23,7 @@ export const Thread = ({
   onRemoveComment
 }: Props) => {
 
-  const onClickOutside = useOnClickOutside()
+  const onClickOutside = useDeselectComment()
 
   return (
     <OutsideClick

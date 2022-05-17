@@ -16,7 +16,7 @@ export const CommentLeaf = (
   const { attributes, children, leaf, nodeProps } = props
   const rootProps = getRootProps(props)
 
-  const editor = usePlateEditorRef()!
+  const editor = usePlateEditorRef()
   const commentsStore = useEditorCommentStore()
 
   const onClick = useCallback(() => {

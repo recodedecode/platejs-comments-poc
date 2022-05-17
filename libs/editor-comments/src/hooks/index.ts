@@ -1,2 +1,3 @@
-export * from './useInsertCommentThread'
-export * from './useOnClickOutside'
+export * from './useInsertComment'
+export * from './useDeselectComment'
+export * from './useRemoveCommentListener'
