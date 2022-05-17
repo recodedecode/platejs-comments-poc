@@ -1,3 +1,4 @@
+import { Comment } from '@styled-icons/boxicons-regular/Comment'
 import { FormatAlignCenter } from '@styled-icons/material/FormatAlignCenter'
 import { FormatAlignLeft } from '@styled-icons/material/FormatAlignLeft'
 import { FormatAlignRight } from '@styled-icons/material/FormatAlignRight'
@@ -20,16 +21,21 @@ import {
   MarkToolbarButton,
   AlignToolbarButton,
   BlockToolbarButton,
-  HeadingToolbar,
   ListToolbarButton,
   getPluginType,
   usePlateEditorRef,
 } from '@udecode/plate'
 
+import {
+  useInsertCommentThread,
+  MARK_COMMENT_THREAD,
+} from '@proto/editor-comments'
+
 
 export const TextareaToolbar = () => {
 
   const editor = usePlateEditorRef()!
+  const { onAddComment } = useInsertCommentThread(editor)
 
   return (
     <>
@@ -65,6 +71,13 @@ export const TextareaToolbar = () => {
       <AlignToolbarButton
         value="right"
         icon={<FormatAlignRight />} />
+      <div className="editor-toolbar-divider" />
+      <div data-slate-comment={true}>
+        <MarkToolbarButton
+          type={getPluginType(editor, MARK_COMMENT_THREAD)}
+          icon={<Comment />}
+          onMouseDown={onAddComment} />
+      </div>
     </>
   )
 }

@@ -4,7 +4,9 @@
     "demo": "apps/demo",
     "demo-e2e": "apps/demo-e2e",
     "editor": "libs/editor",
+    "editor-comments": "libs/editor-comments",
     "editor-config": "libs/editor-config",
+    "editor-threads": "libs/editor-threads",
     "editor-tools": "libs/editor-tools"
   }
 }

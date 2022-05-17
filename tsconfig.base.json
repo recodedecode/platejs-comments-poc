@@ -16,7 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@proto/editor": ["libs/editor/src/index.ts"],
+      "@proto/editor-comments": ["libs/editor-comments/src/index.ts"],
       "@proto/editor-config": ["libs/editor-config/src/index.ts"],
+      "@proto/editor-threads": ["libs/editor-threads/src/index.ts"],
       "@proto/editor-tools": ["libs/editor-tools/src/index.ts"]
     }
   },

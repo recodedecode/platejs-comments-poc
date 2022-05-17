@@ -31,6 +31,11 @@ import {
   createPlugins,
 } from '@udecode/plate'
 
+import {
+  createCommentThreadPlugin,
+  createTextPlugin,
+} from '@proto/editor-comments'
+
 import { configTextArea} from '../configs'
 
 
@@ -67,6 +72,8 @@ export const createTextAreaPlugins = () => {
     createComboboxPlugin(),
     createMentionPlugin(),
     createJuicePlugin(),
+    // createCommentThreadPlugin(), // TODO remove as may no longer be necessary
+    createTextPlugin(),
   ], {
     components,
   })

@@ -29,6 +29,7 @@ export const HomeScreen = () => {
     if ( ! editorRef?.current) {
       return
     }
+    console.log(JSON.stringify(value, null, 2))
     setPlaintext(serializeToPlaintext(value))
     setHtml(serializeToHtml(editorRef.current.get.editor(), value))
     setPreview(true)
@@ -94,7 +95,7 @@ export const HomeScreen = () => {
         </>
       )}
     </div>
-  );
+  )
 }
 
 export default HomeScreen

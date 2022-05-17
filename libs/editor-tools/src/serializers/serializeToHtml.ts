@@ -8,5 +8,7 @@ export const serializeToHtml = (
 ) => {
   return serializeHtml(editor, {
     nodes: nodes || [],
+    preserveClassNames: [],
+    stripDataAttributes: true,
   })
 }

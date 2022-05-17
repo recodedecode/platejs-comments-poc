@@ -24,6 +24,10 @@ import {
   EditorNode,
 } from '@proto/editor-tools'
 
+import {
+  CommentThreads
+} from '@proto/editor-threads'
+
 
 export interface TextAreaEditorRef {
   get: {
@@ -85,6 +89,7 @@ const TextAreaEditorWrapped = forwardRef(({ id, onBlur, onFocus, ...props }: Pro
         </div>
         <MentionCombobox items={configTextArea.mentionItems} />
       </Plate>
+      <CommentThreads />
     </div>
   )
 })
