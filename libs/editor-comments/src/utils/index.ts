@@ -147,7 +147,7 @@ export const removeCommentMarks = async (editor: PlateEditor, removableMarkId: s
   
   while (textNodeEntry != null) {
 
-    const [node, path] = textNodeEntry
+    const [node, path] = textNodeEntry as any
     const offset = (node as any)?.text?.length || 0
     const threadIds = getCommentThreadsOnTextNode(textNodeEntry[0])
 
